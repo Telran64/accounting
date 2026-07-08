@@ -45,4 +45,4 @@ export const accountingApi = createApi({
     })
 })
 
-export const {} = accountingApi
+export const {useRegisterUserMutation, useLazyFetchUserQuery, useFetchUserQuery, useChangePasswordMutation, useUpdateUserMutation} = accountingApi

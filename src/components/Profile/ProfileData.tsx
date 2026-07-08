@@ -1,7 +1,25 @@
 import {useAppSelector} from "../../app/hooks.ts";
+import {useFetchUserQuery} from "../../features/api/accountingApi.ts";
 
 const ProfileData = () => {
-    const {firstName, lastName, login, roles} = useAppSelector(state => state.user);
+    const token = useAppSelector(state => state.token);
+    const {data, isLoading, error} = useFetchUserQuery(token, {
+        skip: !token
+    });
+
+    if (isLoading) {
+        return <p>Loading...</p>;
+    }
+
+    if (error) {
+        return <p>Invalid credentials. Please sign in again</p>;
+    }
+
+    if (!data) {
+        return <p>User not found</p>;
+    }
+
+    const {firstName, lastName, login, roles} = data;
 
     return (
         <>
